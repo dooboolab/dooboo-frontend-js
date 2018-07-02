@@ -1,22 +1,20 @@
-# React Typescript Starter
+# React Starter with Flow
 > Specification
 * postcss
-* typescript
+* flow
 * react-router-dom v4
-* test jest with typescript
+* mobx
+* test jest with mobx
 * import css as module
 * localization
-* mobx
-* data models
 
 > More example will be found in `desktop` branch.
 
 # Gain points
 ```
-1. Typescript support. No need to run tsc because webpack is doing it for you with ts-loader.
-2. Sample of react-router-dom v4.
-3. Able to learn how to structure react app with typescript and mobx with jest-ts.
-4. Learn how to localize your project.
+1. Sample of react-router-dom v4.
+2. Able to learn how to structure react app with flow and mobx with jest.
+3. Learn how to localize your project.
 ```
 
 # INSTALL
@@ -39,18 +37,18 @@ app/
 │  └─ models
 │  └─ stores
 │  └─ utils
-│  └─ index.tsx
+│  └─ index.js
 │  └─ root.css // global variables for css used in compoenents
 ├─ test/
 ├─ .gitignore
 ├─ .babelrc
+├─ .eslintignore
+├─ .eslintrc.js
 ├─ package.json
 ├─ postcss.config.js
 ├─ README.md
 ├─ STRINGS.js
 ├─ tsconfig.json
-├─ tslint.json
-├─ typings.d.ts
 └─ webpack.config.js
 ```
 
@@ -72,25 +70,19 @@ npm test
 ```
 > jest -u
 
- PASS  src/components/shared/__tests__/Button.test.tsx
- › 2 snapshots updated.
- PASS  src/components/screen/__tests__/Intro.test.tsx
- › 1 snapshot written.
-
-Snapshot Summary
- › 1 snapshot written in 1 test suite.
- › 2 snapshots updated in 1 test suite.
+ PASS  src/components/shared/__tests__/Button.test.js
+ PASS  src/components/screen/__tests__/Intro.test.js
 
 Test Suites: 2 passed, 2 total
 Tests:       3 passed, 3 total
-Snapshots:   2 updated, 1 added, 3 total
-Time:        2.745s
+Snapshots:   3 passed, 3 total
+Time:        1.978s
 Ran all test suites.
 ```
 
 # Adding component
-> Copy sourcecode in /src/components/screen/NotFound.tsx
-> Create new tsx file with compnent name you will create
+> Copy sourcecode in /src/components/screen/NotFound.js
+> Create new js file with compnent name you will create
 > If you want to add seperate css file, add it like below
 ```
 const styles = require('./NotFound.css');
@@ -114,21 +106,14 @@ options: {
 # Adding mobx store
 > Include as many stores as you want in src/stores directory.
 ```
-// class in src/stores/appStore.ts
+// class in src/stores/appStore.js
 class Store {
-  @observable public user: User;
-  @observable private locale: Localization;
+  @observable user: User = new User();
+  @observable locale: Localization = new Localization();
+  @observable isDesktop: boolean = false;
+  @observable isOpen: boolean = false;
 
-  constructor() {
-    this.user = new User();
-    this.locale = new Localization();
-  }
-
-  public setLocale(param: Localization) {
-    this.locale = param;
-  }
-
-  public getString = (param: string) => {
+  getString = (param: string) => {
     return this.locale.getString(param);
   }
 }
@@ -138,7 +123,7 @@ class Store {
 We've created test examples with jest-ts in `src/components/screen/__tests__` and `src/components/shared/__tests__`. Since react is component oriented, we've designed to focus on writing test in same level of directory with component. You can simply run `npm test` to test if it succeeds and look more closer opening the source.
 
 # Localization
-We've defined Localization class in `src/models/Localization.ts`. This model class is used in mobx store which is `src/stores/appStore.ts`. Localization model imports `STRINGS.ts` which handles localized strings.
+We've defined Localization class in `src/models/Localization.js`. This model class is used in mobx store which is `src/stores/appStore.js`. Localization model imports `STRINGS.js` which handles localized strings.
 ```
 const STRINGS = {
   en: { // English
@@ -163,7 +148,7 @@ const STRINGS = {
   },
   ...
 ```
-In `index.tsx` when app starts it search for navigator's locale and set mobx state.
+In `index.js` when app starts it search for navigator's locale and set mobx state.
 ```
   const userLang: string = navigator.language;
   const localization = new Localization();
@@ -176,4 +161,4 @@ In `index.tsx` when app starts it search for navigator's locale and set mobx sta
 16.2.0
 
 # react-router-dom version
-4.2.2
+4.3.1

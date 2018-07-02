@@ -21,7 +21,7 @@ module.exports = {
     extensions: ['.js', 'jsx'],
   },
   devServer: {
-    contentBase: __dirname + '/dist/',
+    contentBase: path.join(__dirname, '/dist/'),
     inline: true,
     host: 'localhost',
     port: 8080,
@@ -37,7 +37,7 @@ module.exports = {
             query: {
               cacheDirectory: true,
               presets: ['react', 'env', 'stage-0'],
-              plugins: ['transform-decorators-legacy' ]
+              plugins: ['transform-decorators-legacy']
             },
           },
         ],
@@ -45,18 +45,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [ 
+        use: [
           'style-loader',
-          { 
+          {
             loader: 'css-loader',
-            options: { 
+            options: {
               importLoaders: 1,
               modules: true,
               // you can remove the comment in above code if you wanna uglify css classnames to scope to specific component
             }
           },
-          { 
-            loader: 'postcss-loader', 
+          {
+            loader: 'postcss-loader',
             options: {
               ident: 'postcss',
               plugins: [
