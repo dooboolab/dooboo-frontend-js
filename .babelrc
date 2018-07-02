@@ -1,0 +1,8 @@
+{
+  "presets": ["flow", "env", "es2015", "react"],
+  "plugins": [
+    "transform-react-jsx-source",
+    "transform-decorators-legacy",
+    "transform-class-properties"
+  ]
+}

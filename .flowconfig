@@ -1,0 +1,14 @@
+[ignore]
+; mobx setup
+.*node_modules/babel-plugin-flow-react-proptypes*.
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+esproposal.decorators=ignore
+
+[strict]
