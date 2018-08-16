@@ -36,8 +36,26 @@ module.exports = {
             loader: 'babel-loader',
             query: {
               cacheDirectory: true,
-              presets: ['react', 'env', 'stage-0'],
-              plugins: ['transform-decorators-legacy']
+              presets: [
+                '@babel/preset-env',
+                '@babel/preset-react',
+                '@babel/preset-flow'
+              ],
+              plugins: [
+                ['@babel/plugin-proposal-decorators', { 'legacy': true }],
+                '@babel/plugin-proposal-function-sent',
+                '@babel/plugin-proposal-export-namespace-from',
+                '@babel/plugin-proposal-numeric-separator',
+                '@babel/plugin-proposal-throw-expressions',
+                ['@babel/plugin-proposal-class-properties', { 'loose': true }],
+                [
+                  '@babel/plugin-transform-runtime',
+                  {
+                    'helpers': true,
+                    'regenerator': false
+                  }
+                ]
+              ]
             },
           },
         ],
