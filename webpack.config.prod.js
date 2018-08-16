@@ -28,25 +28,31 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            options: { presets: ['react', 'env', 'stage-0'] },
+            options: {
+              presets: [
+                '@babel/preset-env',
+                '@babel/preset-react',
+                '@babel/preset-flow'
+              ],
+            },
           },
         ],
         exclude: [/node_modules/]
       },
       {
         test: /\.css$/,
-        use: [ 
+        use: [
           'style-loader',
-          { 
+          {
             loader: 'css-loader',
-            options: { 
+            options: {
               importLoaders: 1,
               // modules: true,
               // you can remove the comment in above code if you wanna uglify css classnames to scope to specific component
             },
           },
-          { 
-            loader: 'postcss-loader', 
+          {
+            loader: 'postcss-loader',
             options: {
               ident: 'postcss',
               plugins: [
@@ -67,5 +73,9 @@ module.exports = {
         ]
       }
     ]
+  },
+  performance: {
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
   },
 };
