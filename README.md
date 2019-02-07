@@ -158,7 +158,7 @@ In `index.js` when app starts it search for navigator's locale and set mobx stat
 ```
 
 # React version
-16.7.0
+16.8
 
 # react-router-dom version
-4.3
+4
