@@ -21,7 +21,7 @@ jobs: # a collection of steps
           paths:
             - ./node_modules
       - run:
-          name: ESLint Test
+          name: Lint Test
           working_directory: .
           command: |
             npm run lint
