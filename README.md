@@ -1,4 +1,7 @@
 # React Starter with Flow
+[![codecov](https://codecov.io/gh/dooboolab/dooboo-frontend-js/branch/master/graph/badge.svg)](https://codecov.io/gh/dooboolab/dooboo-frontend-js)
+[![CircleCI](https://circleci.com/gh/dooboolab/dooboo-frontend-js.svg?style=svg)](https://circleci.com/gh/dooboolab/dooboo-frontend-js)
+
 > Specification
 * postcss
 * flow
