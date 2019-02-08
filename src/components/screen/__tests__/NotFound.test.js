@@ -1,18 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Intro from '../Intro';
+import NotFound from '../NotFound';
 import Button from '../../shared/Button';
-import Store from '../../../stores/appStore';
-
-const props = {
-  store: new Store(),
-};
 
 // test for the container page in dom
-describe('Intro page DOM rendering test', () => {
+describe('NotFound page DOM rendering test', () => {
   let tree;
-  const component = <Intro { ...props } />;
+  const component = <NotFound {...props} />;
 
   it('component and snapshot matches', () => {
     tree = renderer.create(component).toJSON();
@@ -20,25 +15,26 @@ describe('Intro page DOM rendering test', () => {
   });
 });
 
+const props = {
+  history: {
+    goBack: jest.fn(),
+  },
+};
+
 describe('Interaction', () => {
   let rendered;
   let instance;
-  const component = <Intro { ...props } />;
+  const component = <NotFound {...props} />;
 
   beforeAll(() => {
     rendered = renderer.create(component);
     instance = rendered.root;
-
-    Object.defineProperty(window.alert, 'window.alert', {
-      configurable: true,
-    });
-    window.alert = jest.fn();
   });
 
   it('Simulate onClick', () => {
     // const spy = jest.spyOn(rendered.getInstance(), 'onClick');
     const button = instance.findByType(Button);
     button.props.onClick();
-    expect(window.alert).toBeCalled();
+    expect(props.history.goBack).toBeCalled();
   });
 });

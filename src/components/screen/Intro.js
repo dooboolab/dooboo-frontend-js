@@ -1,40 +1,61 @@
 // @flow
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { inject, observer } from 'mobx-react';
+import styled from 'styled-components';
 
 import Button from '../shared/Button';
 
-import classNames from 'classnames/bind';
-const classes = require('./Intro.css');
-const cx = classNames.bind(classes);
+import { inject, observer } from 'mobx-react';
+import { media } from '../../theme';
+import Store from '../../stores/appStore';
+
+const Container = styled.div`
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-self: stretch;
+  overflow: scroll;
+  background: linear-gradient(to bottom right, rgb(12, 157, 197), rgb(201, 109, 216));
+
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+`;
+
+const Box = styled.div`
+  position: absolute;
+  width: 85vw;
+  bottom: 40px;
+
+  ${media.mobile`
+    width: 50vw;
+  `}
+`;
 
 type Props = {
-  store: any;
+  store: Store;
 }
 
 type State = {
 
-}
+};
 
 @inject('store') @observer
 class Intro extends Component<Props, State> {
   render() {
     const { getString } = this.props.store.locale;
-    const containerClass = cx({
-      container: true,
-      background: true,
-    });
     return (
-      <div className={containerClass}>
-        <div className={classes.box}>
+      <Container>
+        <Box>
           <Button
+            id='btn'
             onClick={() => this.onClick()}
             white={true}
             txt={getString('BUTTON')}
           />
-        </div>
-      </div>
+        </Box>
+      </Container>
     );
   }
 
