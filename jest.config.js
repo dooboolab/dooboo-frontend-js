@@ -4,6 +4,9 @@ module.exports = {
   'coveragePathIgnorePatterns': [
     '/node_modules/',
     '/test/',
+    'src/models',
+    'src/stores',
+    'src/utils/Functions',
   ],
   'collectCoverage': true,
   'globals': {
@@ -17,7 +20,7 @@ module.exports = {
     'src'
   ],
   'modulePathIgnorePatterns': [
-    'lib'
+    'lib',
   ],
   'setupFiles': [
     './test/jestSetup.js'
