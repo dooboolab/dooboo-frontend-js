@@ -1,27 +1,32 @@
 // @flow
 import React, { Component } from 'react';
 import Button from '../shared/Button';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: 'flex',
+  justify-content: 'center',
+`;
 
 type Props = {
-  history: {
-    goBack: Function;
-  };
-  store: any;
-}
+  history: any,
+};
 
 type State = {
 
-}
+};
 
 class NotFound extends Component<Props, State> {
   render() {
+    const { history } = this.props;
     return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Container>
         <Button
-          onClick={() => this.props.history.goBack()}
-          btnTxt='back to tab page'
+          id='btn'
+          onClick={() => history.goBack()}
+          txt='back to tab page'
         />
-      </div>
+      </Container>
     );
   }
 }

@@ -38,18 +38,18 @@ app/
 │  └─ stores
 │  └─ utils
 │  └─ index.js
-│  └─ root.css // global variables for css used in compoenents
+│  └─ theme.js // global variables for theming in `styled-components`
 ├─ test/
 ├─ .gitignore
-├─ .babelrc
 ├─ .eslintignore
 ├─ .eslintrc.js
+├─ babel.config.js
+├─ jest.config.js
 ├─ package.json
-├─ postcss.config.js
 ├─ README.md
 ├─ STRINGS.js
-├─ tsconfig.json
-└─ webpack.config.js
+├─ webpack.config.js
+└─ webpack.config.prod.js
 ```
 
 # Running the project
@@ -65,43 +65,38 @@ Typically the server runs at `http://localhost:8080`, but should be automaticall
 Testing is also just a command away:
 ```sh
 npm test
-```
-> Result
-```
+
+> dooboo-starter@1.0.0 test /Users/hyochan/Documents/Github/dooboolab/dooboo-frontend-js
 > jest -u
 
- PASS  src/components/shared/__tests__/Button.test.js
- PASS  src/components/screen/__tests__/Intro.test.js
+ PASS  src/components/screen/__tests__/NotFound.test.js
+  NotFound page DOM rendering test
+    ✓ component and snapshot matches (34ms)
+  Interaction
+    ✓ Simulate onClick (2ms)
 
-Test Suites: 2 passed, 2 total
-Tests:       3 passed, 3 total
+ PASS  src/components/shared/__tests__/Button.test.js
+  Button shared component test
+    ✓ component and snapshot matches (38ms)
+  Button Interaction
+    ✓ Simulate onClick (1ms)
+
+ PASS  src/components/screen/__tests__/Intro.test.js
+  Intro page DOM rendering test
+    ✓ component and snapshot matches (31ms)
+  Interaction
+    ✓ Simulate onClick (1ms)
+
+Test Suites: 3 passed, 3 total
+Tests:       6 passed, 6 total
 Snapshots:   3 passed, 3 total
-Time:        1.978s
+Time:        2.684s
 Ran all test suites.
 ```
 
 # Adding component
 > Copy sourcecode in /src/components/screen/NotFound.js
 > Create new js file with compnent name you will create
-> If you want to add seperate css file, add it like below
-```
-const styles = require('./NotFound.css');
-// then you can use above styles in className
-<div className={styles.container}>
-/*
-  Set "no-var-requires" to false in tslint file if you have one.
-  Otherwise you should declare each styles you defined in object to string.
-*/
-```
-Related to [LINK](https://medium.com/@sapegin/css-modules-with-typescript-and-webpack-6b221ebe5f10).
-> Above works by configuring webpack file
-```
-loader: 'css-loader',
-options: { 
-  importLoaders: 1,
-  modules: true,
-  ...
-```
 
 # Adding mobx store
 > Include as many stores as you want in src/stores directory.
