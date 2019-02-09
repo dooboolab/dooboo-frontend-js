@@ -44,7 +44,6 @@ const Spinner = styled.div`
 
 export class Button extends Component<Props, State> {
   static defaultProps: Props = {
-    onPress: () => {},
     isLoading: false,
   };
 

@@ -6,8 +6,8 @@ import { IC_FACEBOOK_W } from '../../../utils/Icons';
 
 // test for the pure component
 describe('Button shared component test', () => {
-  let tree;
-  const component = <Button white={true} txt='Button 2nd test' />;
+  let tree: any;
+  const component: any = <Button white={true} txt='Button 2nd test' />;
 
   it('component and snapshot matches', () => {
     tree = renderer.create(component).toJSON();
@@ -21,17 +21,17 @@ describe('Transparent Interaction', () => {
     count++;
   };
 
-  let rendered;
-  let instance;
-  const component = <Button onPress={onClick}/>;
+  let rendered: TestRenderer.ReactTestRenderer;
+  let root: TestRenderer.ReactTestRenderer.root;
+  let component: any = <Button onPress={onClick}/>;
 
   beforeAll(() => {
     rendered = renderer.create(component);
-    instance = rendered.root;
+    root = rendered.root;
   });
 
   it('Simulate onClick', () => {
-    const button = instance.find(
+    const button = root.find(
       (el: any) => el.type === 'button',
     );
     button.props.onPress();
@@ -45,14 +45,14 @@ describe('WhiteButton Interaction', () => {
     count++;
   };
 
-  let instance;
-  let root;
-  let component;
+  let rendered: TestRenderer.ReactTestRenderer;
+  let root: TestRenderer.ReactTestRenderer.root;
+  let component: any;
 
   it('Simulate onClick', () => {
     component = <Button white={true} onPress={onClick}/>;
-    instance = renderer.create(component);
-    root = instance.root;
+    rendered = renderer.create(component);
+    root = rendered.root;
 
     const button = root.find(
       (el: any) => el.type === 'button',
@@ -63,13 +63,13 @@ describe('WhiteButton Interaction', () => {
 
   it('Render isLoading status', () => {
     component = <Button white={true} isLoading={true}/>;
-    instance = renderer.create(component);
-    root = instance.root;
+    rendered = renderer.create(component);
+    root = rendered.root;
   });
 
   it('Render img status', () => {
     component = <Button white={true} imgSrc={IC_FACEBOOK_W}/>;
-    instance = renderer.create(component);
-    root = instance.root;
+    rendered = renderer.create(component);
+    root = rendered.root;
   });
 });

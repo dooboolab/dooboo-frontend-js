@@ -28,9 +28,9 @@ class User {
   }
 
   checkLoginStatus() {
-    this._email = getSessionStorage('email');
-    this._password = getSessionStorage('password');
-    this._loggedIn = getSessionStorage('loggedIn') === 'true';
+    // this._email = getSessionStorage('email');
+    // this._password = getSessionStorage('password');
+    // this._loggedIn = getSessionStorage('loggedIn') === 'true';
   }
 }
 

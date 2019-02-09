@@ -26,29 +26,6 @@ describe('Intro page DOM rendering test', () => {
   });
 });
 
-// describe('Interaction', () => {
-//   let rendered;
-//   let instance;
-//   const component = <Intro { ...props } />;
-
-//   beforeAll(() => {
-//     rendered = renderer.create(component);
-//     instance = rendered.root;
-
-//     Object.defineProperty(window.alert, 'window.alert', {
-//       configurable: true,
-//     });
-//     window.alert = jest.fn();
-//   });
-
-//   it('Simulate onClick', () => {
-//     // const spy = jest.spyOn(rendered.getInstance(), 'onClick');
-//     const button = instance.findByType(Button);
-//     button.props.onClick();
-//     expect(window.alert).toBeCalled();
-//   });
-// });
-
 describe('Interaction', () => {
   let rendered: TestRenderer.ReactTestRenderer;
   let root: TestRenderer.ReactTestRenderer.root;
