@@ -75,7 +75,7 @@ export class Button extends Component<Props, State> {
     return (
       <TransparentButton
         style={{ height: '60px' }}
-        onPress={() => onPress()}
+        onPress={onPress}
       >
         {
           this.props.isLoading
