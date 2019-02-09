@@ -6,8 +6,11 @@ import styled from 'styled-components';
 import Button from '../shared/Button';
 
 import { inject, observer } from 'mobx-react';
-import { media } from '../../theme';
+import { device } from '../../theme';
 import Store from '../../stores/appStore';
+
+import { IC_FACEBOOK_W_SRCSET, IC_FACEBOOK_W, IC_GOOGLE_W } from '../../utils/Icons';
+import User from '../../models/User';
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +18,7 @@ const Container = styled.div`
   width: 100vw;
   align-self: stretch;
   overflow: scroll;
-  background: linear-gradient(to bottom right, rgb(12, 157, 197), rgb(201, 109, 216));
+  background: ${(props) => props.theme.background};
 
   flex-direction: column;
   justify-content: flex-start;
@@ -23,44 +26,117 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-const Box = styled.div`
-  position: absolute;
-  width: 85vw;
-  bottom: 40px;
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media ${device.mobileS} {
+    max-width: 768px;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+  }
 
-  ${media.mobile`
+  @media ${device.tablet} {
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 400px;
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  position: absolute;
+  flex-direction: column;
+
+  @media ${device.mobileS} {
+    bottom: 40px;
+    width: 85vw;
+    align-self: center;
+  }
+
+  @media ${device.tablet} {
     width: 50vw;
-  `}
+    right: 60px;
+    align-self: center;
+    top: 400px;
+  }
+`;
+
+const Text = styled.span`
+  font-size: 18px;
+  line-height: 1.5;
+  font-family: sans-serif;
+  color: #e3e3e3;
 `;
 
 type Props = {
-  store: Store;
+  store: Store,
+  history: any,
 }
 
 type State = {
-
+  isLoggingIn: boolean,
 };
 
 @inject('store') @observer
 class Intro extends Component<Props, State> {
+  timer: any;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      isLoggingIn: false,
+    };
+  }
+
   render() {
     const { getString } = this.props.store.locale;
     return (
       <Container>
-        <Box>
+        <ContentWrapper>
+          <Text>{this.props.store.user.displayName}</Text>
+          <Text>{this.props.store.user.age}</Text>
+          <Text>{this.props.store.user.job}</Text>
+        </ContentWrapper>
+        <ButtonWrapper>
           <Button
             id='btn'
-            onClick={() => this.onClick()}
-            white={true}
-            txt={getString('BUTTON')}
+            imgSrc={IC_GOOGLE_W}
+            isLoading={this.state.isLoggingIn}
+            onPress={() => this.onLogin()}
+            // white={true}
+            txt={getString('LOGIN')}
           />
-        </Box>
+          <Button
+            id='btn'
+            onPress={() => this.navigate()}
+            white={true}
+            txt={getString('NAVIGATE')}
+          />
+        </ButtonWrapper>
       </Container>
     );
   }
 
-  onClick = () => {
-    alert('clicked');
+  onLogin = () => {
+    this.props.store.user = new User();
+    this.setState({ isLoggingIn: true }, () => {
+      this.timer = setTimeout(() => {
+        this.props.store.user.displayName = 'dooboolab';
+        this.props.store.user.age = 30;
+        this.props.store.user.job = 'developer';
+        this.setState({ isLoggingIn: false });
+      }, 1000);
+    });
+  }
+
+  navigate = () => {
+    const location: Object = {
+      pathname: '/404',
+      state: {},
+    };
+    // this.props.history.replace(location);
+    this.props.history.push(location);
   }
 }
 
