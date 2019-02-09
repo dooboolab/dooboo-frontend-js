@@ -8,7 +8,7 @@ type Props = {
   white?: boolean,
   imgSrc?: any,
   txt?: string,
-  onPress: () => void,
+  onPress?: () => void,
   isLoading: boolean,
 };
 
@@ -53,7 +53,7 @@ export class Button extends Component<Props, State> {
       return (
         <WhiteButton
           style={{ height: '60px' }}
-          onPress={() => onPress()}
+          onPress={onPress}
         >
           {
             this.props.isLoading
