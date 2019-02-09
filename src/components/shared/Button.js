@@ -1,15 +1,15 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { WhiteButton, DarkButton } from '../ui/Buttons';
+import { WhiteButton, TransparentButton } from '../ui/Buttons';
 
 type Props = {
   id?: string,
   white?: boolean,
   imgSrc?: any,
-  srcset?: any,
   txt?: string,
-  onClick: () => void,
+  onPress?: () => void,
+  isLoading: boolean,
 };
 
 type State = {
@@ -29,44 +29,69 @@ const LogoImg = styled.img`
   object-fit: cover
 `;
 
+const Spinner = styled.div`
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
 export class Button extends Component<Props, State> {
   static defaultProps: Props = {
-    onClick: () => {},
+    isLoading: false,
   };
 
   render() {
-    const { white, onClick, imgSrc, txt, srcset } = this.props;
+    const { white, onPress, imgSrc, txt } = this.props;
     if (this.props.white) {
       return (
         <WhiteButton
-          onClick={() => onClick()}
+          style={{ height: '60px' }}
+          onPress={onPress}
         >
           {
-            this.props.imgSrc
-              ? <LogoImg
-                src={this.props.imgSrc}
-                srcSet={this.props.srcset}
-              />
-              : null
+            this.props.isLoading
+              ? <Spinner id='spinner'/>
+              : <div>
+                {
+                  this.props.imgSrc
+                    ? <LogoImg
+                      src={this.props.imgSrc}
+                    />
+                    : null
+                }
+                <Text>{this.props.txt}</Text>
+              </div>
           }
-          <Text>{this.props.txt}</Text>
         </WhiteButton>
       );
     }
     return (
-      <DarkButton
-        onClick={() => onClick()}
+      <TransparentButton
+        style={{ height: '60px' }}
+        onPress={onPress}
       >
         {
-          this.props.imgSrc
-            ? <LogoImg
-              src={this.props.imgSrc}
-              srcSet={this.props.srcset}
-            />
-            : null
+          this.props.isLoading
+            ? <Spinner id='spinner'/>
+            : <div>
+              {
+                this.props.imgSrc
+                  ? <LogoImg
+                    src={this.props.imgSrc}
+                  />
+                  : null
+              }
+              <Text style={{ color: 'white' }}>{this.props.txt}</Text>
+            </div>
         }
-        <Text>{this.props.txt}</Text>
-      </DarkButton>
+      </TransparentButton>
     );
   }
 }

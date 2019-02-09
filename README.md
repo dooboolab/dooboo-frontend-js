@@ -72,8 +72,8 @@ npm test
 > dooboo-starter@1.0.0 test /Users/hyochan/Documents/Github/dooboolab/dooboo-frontend-js
 > jest -u
 
- PASS  src/components/screen/__tests__/NotFound.test.js
-  NotFound page DOM rendering test
+ PASS  src/components/screen/__tests__/Temp.test.js
+  Temp page DOM rendering test
     ✓ component and snapshot matches (34ms)
   Interaction
     ✓ Simulate onClick (2ms)
@@ -98,7 +98,7 @@ Ran all test suites.
 ```
 
 # Adding component
-> Copy sourcecode in /src/components/screen/NotFound.js
+> Copy sourcecode in /src/components/screen/Temp.js
 > Create new js file with compnent name you will create
 
 # Adding mobx store

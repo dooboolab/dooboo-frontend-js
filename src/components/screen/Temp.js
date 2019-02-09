@@ -4,8 +4,12 @@ import Button from '../shared/Button';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  display: 'flex',
-  justify-content: 'center',
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.mainColor};
+  padding: 50px;
 `;
 
 type Props = {
@@ -16,14 +20,14 @@ type State = {
 
 };
 
-class NotFound extends Component<Props, State> {
+class Temp extends Component<Props, State> {
   render() {
     const { history } = this.props;
     return (
       <Container>
         <Button
           id='btn'
-          onClick={() => history.goBack()}
+          onPress={() => history.goBack()}
           txt='back to tab page'
         />
       </Container>
@@ -31,4 +35,4 @@ class NotFound extends Component<Props, State> {
   }
 }
 
-export default NotFound;
+export default Temp;

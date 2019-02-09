@@ -2,9 +2,9 @@ import { observable } from 'mobx';
 import { setSessionStorage, getSessionStorage, destroySessionStorage } from '../utils/Functions';
 
 class User {
-  @observable loggedIn: boolean;
-  email: string;
-  password: string;
+  @observable displayName: string;
+  @observable age: number;
+  @observable job: string;
 
   signup = (email: string, password: string) => {
     setSessionStorage('email', email);
@@ -28,9 +28,9 @@ class User {
   }
 
   checkLoginStatus() {
-    this._email = getSessionStorage('email');
-    this._password = getSessionStorage('password');
-    this._loggedIn = getSessionStorage('loggedIn') === 'true';
+    // this._email = getSessionStorage('email');
+    // this._password = getSessionStorage('password');
+    // this._loggedIn = getSessionStorage('loggedIn') === 'true';
   }
 }
 
