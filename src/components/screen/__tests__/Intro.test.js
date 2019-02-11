@@ -4,34 +4,22 @@ import renderer from 'react-test-renderer';
 import { AppProvider } from '../../../providers';
 import Intro from '../Intro';
 import Button from '../../shared/Button';
+import { AppContext } from './testHelpers';
 
-let props = {
+const props = {
   navigation: {
     navigate: jest.fn(),
   },
   history: {
     push: jest.fn(),
   },
-  store: {
-    state: {
-      user: {
-        displayName: '',
-        age: 0,
-        job: '',
-      },
-    },
-    actions: {
-      resetUser: jest.fn(),
-      setUser: jest.fn(),
-      getString: jest.fn(),
-    },
-  },
+  ...AppContext,
 };
 
 const component = (
-  // <AppProvider>
-  <Intro {...props}/>
-  // </AppProvider>
+  <AppProvider>
+    <Intro {...props}/>
+  </AppProvider>
 );
 
 // test for the container page in dom
@@ -47,34 +35,42 @@ describe('[Intro] screen rendering test', () => {
 describe('[Intro] Interaction', () => {
   let rendered: TestRenderer.ReactTestRenderer;
   let root: TestRenderer.ReactTestRenderer.root;
+  let instance;
+  let children;
 
-  beforeAll(() => {
+  beforeEach(() => {
     rendered = renderer.create(component);
     root = rendered.root;
+    instance = rendered.getInstance();
+    children = instance.props.children;
   });
 
-  it('should simulate onClick', () => {
+  it('should simulate [onLogin] click', () => {
     jest.useFakeTimers();
-    let instance = rendered.getInstance();
-    let children = instance.props.children;
 
-    const spy = jest.spyOn(root.instance, 'onLogin');
+    const intro = root.findByType(Intro);
+
+    const spy = jest.spyOn(intro.instance, 'onLogin');
     const buttons = root.findAllByType(Button);
-    instance.onLogin(props.store); // buttons[0].props.onClick();
+    intro.instance.onLogin(AppContext);
     expect(setTimeout).toHaveBeenCalledTimes(1);
-    expect(instance.state.isLoggingIn).toEqual(true);
+    expect(intro.instance.state.isLoggingIn).toEqual(true);
+    expect(spy).toBeCalled();
 
     jest.runAllTimers();
-    expect(root.instance.state.isLoggingIn).toEqual(false);
-    expect(instance.props.store.actions.setUser).toHaveBeenCalled();
-    expect(spy).toBeCalled();
+    expect(intro.instance.state.isLoggingIn).toEqual(false);
+    expect(intro.instance.props.actions.setUser).toHaveBeenCalled();
+
+    buttons[0].props.onClick();
+  });
+
+  it('should simulate [navigate] click', () => {
+    const buttons = root.findAllByType(Button);
     buttons[1].props.onClick();
-    expect(props.history.push).toBeCalledWith({
+    expect(children.props.history.push).toBeCalledWith({
       pathname: '/404',
       state: {},
     });
-
-    buttons[0].props.onClick();
   });
 });
 

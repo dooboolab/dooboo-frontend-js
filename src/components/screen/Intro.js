@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Button from '../shared/Button';
 
 import { device } from '../../theme';
+import { AppProvider as Provider, AppConsumer } from '../../providers';
 
 import { IC_FACEBOOK_W_SRCSET, IC_FACEBOOK_W, IC_GOOGLE_W } from '../../utils/Icons';
 
@@ -13,6 +14,8 @@ import type {
   User,
 } from '../../types';
 import type { State as AppState } from '../../providers/AppProvider';
+
+import { getString } from '../../../STRINGS';
 
 const Container = styled.div`
   display: flex;
@@ -91,32 +94,38 @@ class Intro extends Component<Props, State> {
   }
 
   render() {
-    const { store: data } = this.props;
-    const { getString } = this.props.store.actions;
     return (
-      <Container>
-        <ContentWrapper>
-          <Text>{data.state.user.displayName}</Text>
-          <Text>{data.state.user.age ? data.state.user.age : ''}</Text>
-          <Text>{data.state.user.job}</Text>
-        </ContentWrapper>
-        <ButtonWrapper>
-          <Button
-            id='btn'
-            imgSrc={IC_GOOGLE_W}
-            isLoading={this.state.isLoggingIn}
-            onClick={() => this.onLogin(data)}
-            // white={true}
-            txt={getString('LOGIN')}
-          />
-          <Button
-            id='btn'
-            onClick={() => this.navigate()}
-            white={true}
-            txt={getString('NAVIGATE')}
-          />
-        </ButtonWrapper>
-      </Container>
+      <AppConsumer>
+        {
+          (data) => {
+            return (
+              <Container>
+                <ContentWrapper>
+                  <Text>{data.state.user.displayName}</Text>
+                  <Text>{data.state.user.age ? data.state.user.age : ''}</Text>
+                  <Text>{data.state.user.job}</Text>
+                </ContentWrapper>
+                <ButtonWrapper>
+                  <Button
+                    id='btn'
+                    imgSrc={IC_GOOGLE_W}
+                    isLoading={this.state.isLoggingIn}
+                    onClick={() => this.onLogin(data)}
+                    // white={true}
+                    txt={getString('LOGIN')}
+                  />
+                  <Button
+                    id='btn'
+                    onClick={() => this.navigate()}
+                    white={true}
+                    txt={getString('NAVIGATE')}
+                  />
+                </ButtonWrapper>
+              </Container>
+            );
+          }
+        }
+      </AppConsumer>
     );
   }
 

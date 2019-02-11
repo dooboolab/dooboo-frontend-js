@@ -13,7 +13,7 @@ type State = {
 
 }
 
-class RootStackNavigator extends Component<Props, State> {
+class SwitchNavigator extends Component<Props, State> {
   render() {
     return (
       <BrowserRouter>
@@ -28,4 +28,4 @@ class RootStackNavigator extends Component<Props, State> {
   }
 }
 
-export default RootStackNavigator;
+export default SwitchNavigator;

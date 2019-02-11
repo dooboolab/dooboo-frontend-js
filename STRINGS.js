@@ -43,74 +43,22 @@ const STRINGS = {
   // },
 };
 
-  // pt-pt: { // Portuguese
+const DEFAULT_LANG = 'en';
+let lang = DEFAULT_LANG;
 
-  // },
-  // de-de: { // German
+if (navigator) {
+  lang = navigator.language.substr(0, 2);
+}
 
-  // },
-  // nl-nl: { // Dutch
+export const getString = (str: string) => {
+  str = STRINGS[lang]
+    ? STRINGS[lang][str]
+    : STRINGS[DEFAULT_LANG][str];
 
-  // },
-  // vi: { // Vietnamese
-
-  // },
-  // ru: { // Russian
-
-  // },
-  // sv-se: { // Swedish
-
-  // },
-  // da: { // Danish
-
-  // },
-  // fi: { // Finnish
-
-  // },
-  // no-no: { // Norwegian, Bokmal
-
-  // },
-  // tr: { // Turkish
-
-  // },
-  // ms-my: { // Malay
-
-  // },
-  // th: { // Thai
-
-  // },
-  // hi: { // Hindi
-
-  // },
-  // hu: { // Hungarian
-
-  // },
-  // pl: { // Polish
-
-  // },
-  // cs: { // Czech
-
-  // },
-  // sk: { // Slovak
-
-  // },
-  // uk: { // Ukrainian
-
-  // },
-  // hr: { // Croatian
-
-  // },
-  // ca: { // Catalan
-
-  // },
-  // ro: { // Romanian
-
-  // },
-  // he: { // Hebrew
-
-  // },
-  // ar-eg: { // Arabic (Egypt)
-
-  // },
+  if (!str) {
+    str = '...';
+  }
+  return str;
+};
 
 export default STRINGS;
