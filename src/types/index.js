@@ -3,3 +3,8 @@ export type User = {
   age: number,
   job: string,
 };
+
+export type Locale = {
+  default: string,
+  current: string,
+};
