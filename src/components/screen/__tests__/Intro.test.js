@@ -1,12 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+import { AppProvider } from '../../../providers';
 import Intro from '../Intro';
 import Button from '../../shared/Button';
-import Store from '../../../stores/appStore';
 
-const props = {
-  store: new Store(),
+let props = {
   navigation: {
     navigate: jest.fn(),
   },
@@ -15,48 +14,53 @@ const props = {
   },
 };
 
-// test for the container page in dom
-describe('Intro page DOM rendering test', () => {
-  let tree;
-  const component = <Intro { ...props } />;
+const component = (
+  <AppProvider>
+    <Intro {...props}/>
+  </AppProvider>
+);
 
-  it('component and snapshot matches', () => {
-    tree = renderer.create(component).toJSON();
-    expect(tree).toMatchSnapshot();
+// test for the container page in dom
+describe('[Intro] screen rendering test', () => {
+  let json;
+
+  it('should render outer component and snapshot matches', () => {
+    json = renderer.create(component).toJSON();
+    expect(json).toMatchSnapshot();
   });
 });
 
-describe('Interaction', () => {
+describe('[Intro] Interaction', () => {
   let rendered: TestRenderer.ReactTestRenderer;
   let root: TestRenderer.ReactTestRenderer.root;
-  const component = <Intro { ...props } />;
 
   beforeAll(() => {
     rendered = renderer.create(component);
     root = rendered.root;
   });
 
-  it('Simulate onPress', () => {
+  it('should simulate onClick', () => {
     jest.useFakeTimers();
-    const spy = jest.spyOn(rendered.getInstance().wrappedInstance, 'onLogin');
+    let instance = rendered.getInstance();
+    let children = instance.props.children;
+
+    // const spy = jest.spyOn(root.instance, 'onLogin');
     const buttons = root.findAllByType(Button);
-    root.instance.wrappedInstance.onLogin(); // == buttons[0].props.onPress();
+    buttons[0].props.onClick();
     expect(setTimeout).toHaveBeenCalledTimes(1);
-    expect(root.instance.wrappedInstance.state.isLoggingIn).toEqual(true);
+    // expect(instance.state.isLoggingIn).toEqual(true);
 
     jest.runAllTimers();
-    expect(root.instance.wrappedInstance.state.isLoggingIn).toEqual(false);
-    expect(props.store.user.displayName).toEqual('dooboolab');
-    expect(props.store.user.age).toEqual(30);
-    expect(props.store.user.job).toEqual('developer');
-    expect(spy).toBeCalled();
-    buttons[1].props.onPress();
+    // expect(root.instance.state.isLoggingIn).toEqual(false);
+    expect(instance.state.user.displayName).toEqual('dooboolab');
+    expect(instance.state.user.age).toEqual(30);
+    expect(instance.state.user.job).toEqual('developer');
+    // expect(spy).toBeCalled();
+    buttons[1].props.onClick();
     expect(props.history.push).toBeCalledWith({
       pathname: '/404',
       state: {},
     });
-
-    buttons[0].props.onPress();
   });
 });
 

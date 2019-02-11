@@ -34,7 +34,7 @@ describe('Interaction', () => {
   it('Simulate onClick', () => {
     // const spy = jest.spyOn(rendered.getInstance(), 'onClick');
     const button = root.findByType(Button);
-    button.props.onPress();
+    button.props.onClick();
     expect(props.history.goBack).toBeCalled();
   });
 });
