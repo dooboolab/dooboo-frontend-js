@@ -47,9 +47,7 @@ exports[`[Intro] screen rendering test should render outer component and snapsho
               "color": "white",
             }
           }
-        >
-          LOGIN
-        </span>
+        />
       </div>
     </button>
     <button
@@ -64,9 +62,7 @@ exports[`[Intro] screen rendering test should render outer component and snapsho
       <div>
         <span
           className="sc-htpNat gUfFlb"
-        >
-          NAVIGATE
-        </span>
+        />
       </div>
     </button>
   </div>

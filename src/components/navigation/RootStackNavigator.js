@@ -19,8 +19,8 @@ class RootStackNavigator extends Component<Props, State> {
       <BrowserRouter>
         <div style={{ textAlign: 'center' }}>
           <Switch>
-            <Route exact={true} path='/' component={Intro} />
-            <Route component={Temp} />
+            <Route exact={true} path='/' render={(props) => <Intro {...props} {...this.props}/>} />
+            <Route render={(props) => <Temp {...props} {...this.props}/>} />
           </Switch>
         </div>
       </BrowserRouter>

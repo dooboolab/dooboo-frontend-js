@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import Button from '../shared/Button';
 
 import { device } from '../../theme';
-import { AppConsumer } from '../../providers/AppProvider';
 
 import { IC_FACEBOOK_W_SRCSET, IC_FACEBOOK_W, IC_GOOGLE_W } from '../../utils/Icons';
 
@@ -74,6 +73,7 @@ const Text = styled.span`
 
 type Props = {
   history: any,
+  store: any,
 }
 
 type State = {
@@ -91,43 +91,36 @@ class Intro extends Component<Props, State> {
   }
 
   render() {
+    const { store: data } = this.props;
+    const { getString } = this.props.store.actions;
     return (
-      <AppConsumer>
-        {
-          (data) => {
-            return (
-              <Container>
-                <ContentWrapper>
-                  <Text>{data.state.user.displayName}</Text>
-                  <Text>{data.state.user.age ? data.state.user.age : ''}</Text>
-                  <Text>{data.state.user.job}</Text>
-                </ContentWrapper>
-                <ButtonWrapper>
-                  <Button
-                    id='btn'
-                    imgSrc={IC_GOOGLE_W}
-                    isLoading={this.state.isLoggingIn}
-                    onClick={() => this.onLogin(data)}
-                    // white={true}
-                    txt={'LOGIN'}
-                  />
-                  <Button
-                    id='btn'
-                    onClick={() => this.navigate()}
-                    white={true}
-                    txt={'NAVIGATE'}
-                  />
-                </ButtonWrapper>
-              </Container>
-            );
-          }
-        }
-      </AppConsumer>
+      <Container>
+        <ContentWrapper>
+          <Text>{data.state.user.displayName}</Text>
+          <Text>{data.state.user.age ? data.state.user.age : ''}</Text>
+          <Text>{data.state.user.job}</Text>
+        </ContentWrapper>
+        <ButtonWrapper>
+          <Button
+            id='btn'
+            imgSrc={IC_GOOGLE_W}
+            isLoading={this.state.isLoggingIn}
+            onClick={() => this.onLogin(data)}
+            // white={true}
+            txt={getString('LOGIN')}
+          />
+          <Button
+            id='btn'
+            onClick={() => this.navigate()}
+            white={true}
+            txt={getString('NAVIGATE')}
+          />
+        </ButtonWrapper>
+      </Container>
     );
   }
 
   onLogin = (data: AppState) => {
-    console.log('onLogin');
     data.actions.resetUser();
     this.setState({ isLoggingIn: true }, () => {
       this.timer = setTimeout(() => {
