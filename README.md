@@ -6,17 +6,17 @@
 * postcss
 * flow
 * react-router-dom v4
-* mobx
-* test jest with mobx
-* import css as module
+* context-api
+* test with `jest` and `react-test-renderer`
+* styled-component
 * localization
 
-> More example will be found in `desktop` branch.
+> We decided to remove `mobx` from `js` boilerplate. We didn't, however, make changes in `ts` boilerplate. The reason to remove `mobx` is that we thought this isn't suitable with what `react` brings up as a design pattern. Today, they are more supportive in `functional-programming` rather than `OOP` which has been powered by `react-hook` in `16.8`. Unlike, `js`, `typescript` users are more familiar with `OOP` programming because `typescript` has mimicked lots of features is `JAVA` or `C++`. Hope you enjoy what we've brought up today as `react native javascript boilerplate`.
 
 # Gain points
 ```
 1. Sample of react-router-dom v4.
-2. Able to learn how to structure react app with flow and mobx with jest.
+2. Able to learn how to structure react app with `flow`, `context-api` with `jest`.
 3. Learn how to localize your project.
 ```
 
