@@ -6,7 +6,7 @@ exports[`Temp page DOM rendering test component and snapshot matches 1`] = `
 >
   <button
     className="sc-bdVaJa jAKSux"
-    onPress={[Function]}
+    onClick={[Function]}
     style={
       Object {
         "height": "60px",

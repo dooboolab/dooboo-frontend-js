@@ -4,8 +4,6 @@ module.exports = {
   'coveragePathIgnorePatterns': [
     '/node_modules/',
     '/test/',
-    'src/models',
-    'src/stores',
     'src/utils/Functions',
     'src/utils/Icons',
     'src/ui',

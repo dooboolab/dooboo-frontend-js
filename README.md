@@ -37,9 +37,13 @@ app/
 ├─ src/
 │  └─ apis
 │  └─ components
-│  └─ models
-│  └─ stores
+│     └─ navigation
+│     └─ screen
+│     └─ shared
 │  └─ utils
+│  └─ ui
+│  └─ contexts
+│  └─ providers
 │  └─ index.js
 │  └─ theme.js // global variables for theming in `styled-components`
 ├─ test/
@@ -100,22 +104,6 @@ Ran all test suites.
 # Adding component
 > Copy sourcecode in /src/components/screen/Temp.js
 > Create new js file with compnent name you will create
-
-# Adding mobx store
-> Include as many stores as you want in src/stores directory.
-```
-// class in src/stores/appStore.js
-class Store {
-  @observable user: User = new User();
-  @observable locale: Localization = new Localization();
-  @observable isDesktop: boolean = false;
-  @observable isOpen: boolean = false;
-
-  getString = (param: string) => {
-    return this.locale.getString(param);
-  }
-}
-```
 
 # Writing tests with Jest
 We've created test examples with jest-ts in `src/components/screen/__tests__` and `src/components/shared/__tests__`. Since react is component oriented, we've designed to focus on writing test in same level of directory with component. You can simply run `npm test` to test if it succeeds and look more closer opening the source.

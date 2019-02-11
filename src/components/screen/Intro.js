@@ -5,12 +5,15 @@ import styled from 'styled-components';
 
 import Button from '../shared/Button';
 
-import { inject, observer } from 'mobx-react';
 import { device } from '../../theme';
-import Store from '../../stores/appStore';
+import { AppConsumer } from '../../providers/AppProvider';
 
 import { IC_FACEBOOK_W_SRCSET, IC_FACEBOOK_W, IC_GOOGLE_W } from '../../utils/Icons';
-import User from '../../models/User';
+
+import type {
+  User,
+} from '../../types';
+import type { State as AppState } from '../../providers/AppProvider';
 
 const Container = styled.div`
   display: flex;
@@ -70,7 +73,6 @@ const Text = styled.span`
 `;
 
 type Props = {
-  store: Store,
   history: any,
 }
 
@@ -78,7 +80,6 @@ type State = {
   isLoggingIn: boolean,
 };
 
-@inject('store') @observer
 class Intro extends Component<Props, State> {
   timer: any;
 
@@ -90,41 +91,52 @@ class Intro extends Component<Props, State> {
   }
 
   render() {
-    const { getString } = this.props.store.locale;
     return (
-      <Container>
-        <ContentWrapper>
-          <Text>{this.props.store.user.displayName}</Text>
-          <Text>{this.props.store.user.age}</Text>
-          <Text>{this.props.store.user.job}</Text>
-        </ContentWrapper>
-        <ButtonWrapper>
-          <Button
-            id='btn'
-            imgSrc={IC_GOOGLE_W}
-            isLoading={this.state.isLoggingIn}
-            onPress={() => this.onLogin()}
-            // white={true}
-            txt={getString('LOGIN')}
-          />
-          <Button
-            id='btn'
-            onPress={() => this.navigate()}
-            white={true}
-            txt={getString('NAVIGATE')}
-          />
-        </ButtonWrapper>
-      </Container>
+      <AppConsumer>
+        {
+          (data) => {
+            return (
+              <Container>
+                <ContentWrapper>
+                  <Text>{data.state.user.displayName}</Text>
+                  <Text>{data.state.user.age ? data.state.user.age : ''}</Text>
+                  <Text>{data.state.user.job}</Text>
+                </ContentWrapper>
+                <ButtonWrapper>
+                  <Button
+                    id='btn'
+                    imgSrc={IC_GOOGLE_W}
+                    isLoading={this.state.isLoggingIn}
+                    onClick={() => this.onLogin(data)}
+                    // white={true}
+                    txt={'LOGIN'}
+                  />
+                  <Button
+                    id='btn'
+                    onClick={() => this.navigate()}
+                    white={true}
+                    txt={'NAVIGATE'}
+                  />
+                </ButtonWrapper>
+              </Container>
+            );
+          }
+        }
+      </AppConsumer>
     );
   }
 
-  onLogin = () => {
-    this.props.store.user = new User();
+  onLogin = (data: AppState) => {
+    console.log('onLogin');
+    data.actions.resetUser();
     this.setState({ isLoggingIn: true }, () => {
       this.timer = setTimeout(() => {
-        this.props.store.user.displayName = 'dooboolab';
-        this.props.store.user.age = 30;
-        this.props.store.user.job = 'developer';
+        const user: User = {
+          displayName: 'dooboolab',
+          age: 30,
+          job: 'developer',
+        };
+        data.actions.setUser(user);
         this.setState({ isLoggingIn: false });
       }, 1000);
     });
