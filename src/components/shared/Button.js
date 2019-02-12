@@ -7,7 +7,7 @@ type Props = {
   id?: string,
   white?: boolean,
   imgSrc?: any,
-  txt?: string,
+  text?: string,
   onClick?: () => void,
   isLoading: boolean,
 };
@@ -42,13 +42,13 @@ const Spinner = styled.div`
   }
 `;
 
-export class Button extends Component<Props, State> {
+class Button extends Component<Props, State> {
   static defaultProps: Props = {
     isLoading: false,
   };
 
   render() {
-    const { white, onClick, imgSrc, txt } = this.props;
+    const { white, onClick, imgSrc, text } = this.props;
     if (this.props.white) {
       return (
         <WhiteButton
@@ -66,7 +66,7 @@ export class Button extends Component<Props, State> {
                     />
                     : null
                 }
-                <Text>{this.props.txt}</Text>
+                <Text>{this.props.text}</Text>
               </div>
           }
         </WhiteButton>
@@ -88,7 +88,7 @@ export class Button extends Component<Props, State> {
                   />
                   : null
               }
-              <Text style={{ color: 'white' }}>{this.props.txt}</Text>
+              <Text style={{ color: 'white' }}>{this.props.text}</Text>
             </div>
         }
       </TransparentButton>

@@ -112,13 +112,13 @@ class Intro extends Component<Props, State> {
                     isLoading={this.state.isLoggingIn}
                     onClick={() => this.onLogin(data)}
                     // white={true}
-                    txt={getString('LOGIN')}
+                    text={getString('LOGIN')}
                   />
                   <Button
                     id='btn'
                     onClick={() => this.navigate()}
                     white={true}
-                    txt={getString('NAVIGATE')}
+                    text={getString('NAVIGATE')}
                   />
                 </ButtonWrapper>
               </Container>

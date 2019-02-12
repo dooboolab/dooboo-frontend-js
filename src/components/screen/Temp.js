@@ -28,7 +28,7 @@ class Temp extends Component<Props, State> {
         <Button
           id='btn'
           onClick={() => history.goBack()}
-          txt='back to tab page'
+          text='back to tab page'
         />
       </Container>
     );

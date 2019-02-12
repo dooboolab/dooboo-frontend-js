@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../Button';
+import Button from '../Button';
 
 import renderer from 'react-test-renderer';
 import { IC_FACEBOOK_W } from '../../../utils/Icons';
@@ -7,7 +7,7 @@ import { IC_FACEBOOK_W } from '../../../utils/Icons';
 // test for the pure component
 describe('[Button] shared component test', () => {
   let tree: any;
-  const component: any = <Button white={true} txt='Button 2nd test' />;
+  const component: any = <Button white={true} text='Button 2nd test' />;
 
   it('component and snapshot matches', () => {
     tree = renderer.create(component).toJSON();
