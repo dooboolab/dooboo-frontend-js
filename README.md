@@ -11,7 +11,7 @@
 * styled-component
 * localization
 
-> We decided to remove `mobx` from `js` boilerplate. We didn't, however, make changes in `ts` boilerplate. The reason to remove `mobx` is that we thought this isn't suitable with what `react` brings up as a design pattern. Today, they are more supportive in `functional-programming` rather than `OOP` which has been powered by `react-hook` in `16.8`. Unlike, `js`, `typescript` users are more familiar with `OOP` programming because `typescript` has mimicked lots of features is `JAVA` or `C++`. Hope you enjoy what we've brought up today as `react native javascript boilerplate`.
+> We decided to remove `mobx` from `js` boilerplate. We didn't, however, make changes in `ts` boilerplate. The reason to remove `mobx` is that we thought this isn't suitable with what `react` brought up as a design pattern. Today, they are more supportive in `functional-programming` rather than `object-oriented` which has been powered by `react-hook` in `16.8`. Unlike, `js`, `typescript` users are more familiar with `OOP` programming because `typescript` has mimicked lots of features in `JAVA` and `C++`. Hope you enjoy what we've brought up today as `react native javascript boilerplate`.
 
 # Gain points
 ```
