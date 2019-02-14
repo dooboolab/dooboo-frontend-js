@@ -99,6 +99,7 @@ function Intro(props: Props) {
       };
       dispatch({ type: 'set-user', payload: user });
       setIsLoggingIn(false);
+      clearTimeout(timer);
     }, 1000);
   };
 

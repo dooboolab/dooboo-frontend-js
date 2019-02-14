@@ -13,21 +13,22 @@ const props = {
   history: {
     push: jest.fn(),
   },
-  ...AppContext,
 };
 
 const component = (
   <AppProvider>
-    <Intro {...props}/>
+    <Intro {...props} />
   </AppProvider>
 );
+
+const context = AppContext;
 
 // test for the container page in dom
 describe('[Intro] screen rendering test', () => {
   let json;
 
   it('should render outer component and snapshot matches', () => {
-    json = renderer.create(component).toJSON();
+    json = renderer.create(component, { context }).toJSON();
     expect(json).toMatchSnapshot();
   });
 });
@@ -38,32 +39,22 @@ describe('[Intro] Interaction', () => {
   let instance;
 
   beforeEach(() => {
-    rendered = renderer.create(component);
+    rendered = renderer.create(component, { context });
     root = rendered.root;
   });
 
   it('should simulate [onLogin] click', () => {
     jest.useFakeTimers();
 
-    const intro = root.findByType(Intro);
-    // console.log('intro', intro);
-    
     const buttons = root.findAllByType(Button);
-    // console.log('buttons', buttons);
-    
-    // buttons[0].props.onClick();
-    // const spy = jest.spyOn(Intro, 'onLogin');
-    // const buttons = root.findAllByType(Button);
-    // instance.onLogin(AppContext);
-    // expect(setTimeout).toHaveBeenCalledTimes(1);
-    // expect(instance.state.isLoggingIn).toEqual(true);
-    // expect(spy).toBeCalled();
-
-    // jest.runAllTimers();
-    // expect(instance.state.isLoggingIn).toEqual(false);
-    // expect(instance.dispatc).toHaveBeenCalled();
-
-    // buttons[0].props.onClick();
+    buttons[0].props.onClick();
+    // expect(context.dispatch).toHaveBeenCalledWith({ type: 'reset-user' });
+    expect(setTimeout).toHaveBeenCalledTimes(1);
+    expect(buttons[0].props.isLoading).toEqual(true);
+    jest.runAllTimers();
+    // expect(context.dispatch).toHaveBeenCalledWith({ type: 'set-user' }, expect.any(Object));
+    expect(clearTimeout).toHaveBeenCalledTimes(1);
+    expect(buttons[0].props.isLoading).toEqual(false);
   });
 
   it('should simulate [navigate] click', () => {
