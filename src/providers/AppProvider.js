@@ -24,7 +24,6 @@ const reducer = (state, action) => {
     case 'reset-user':
       return { ...state, user: initialState.user };
     case 'set-user':
-      console.log('setUser', state, action);
       return { ...state, user: action.payload };
   }
 };
