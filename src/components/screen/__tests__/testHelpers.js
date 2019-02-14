@@ -6,9 +6,5 @@ export const AppContext = {
       job: '',
     },
   },
-  actions: {
-    resetUser: jest.fn(),
-    setUser: jest.fn(),
-    getString: jest.fn(),
-  },
+  dispatch: jest.fn(),
 };
