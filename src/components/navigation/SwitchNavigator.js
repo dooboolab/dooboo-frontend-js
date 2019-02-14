@@ -13,19 +13,17 @@ type State = {
 
 }
 
-class SwitchNavigator extends Component<Props, State> {
-  render() {
-    return (
-      <BrowserRouter>
-        <div style={{ textAlign: 'center' }}>
-          <Switch>
-            <Route exact={true} path='/' render={(props) => <Intro {...props} {...this.props}/>} />
-            <Route render={(props) => <Temp {...props} {...this.props}/>} />
-          </Switch>
-        </div>
-      </BrowserRouter>
-    );
-  }
+function SwitchNavigator(props: Props, state: State) {
+  return (
+    <BrowserRouter>
+      <div style={{ textAlign: 'center' }}>
+        <Switch>
+          <Route exact={true} path='/' render={(param) => <Intro {...param} {...props}/>} />
+          <Route render={(param) => <Temp {...param} {...props}/>} />
+        </Switch>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default SwitchNavigator;

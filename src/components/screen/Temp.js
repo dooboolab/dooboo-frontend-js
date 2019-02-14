@@ -20,19 +20,17 @@ type State = {
 
 };
 
-class Temp extends Component<Props, State> {
-  render() {
-    const { history } = this.props;
-    return (
-      <Container>
-        <Button
-          id='btn'
-          onClick={() => history.goBack()}
-          text='back to tab page'
-        />
-      </Container>
-    );
-  }
+function Temp(props: Props, state: State) {
+  const { history } = props;
+  return (
+    <Container>
+      <Button
+        id='btn'
+        onClick={() => history.goBack()}
+        text='back to tab page'
+      />
+    </Container>
+  );
 }
 
 export default Temp;

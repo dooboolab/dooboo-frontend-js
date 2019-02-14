@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Button from '../shared/Button';
 
 import { device } from '../../theme';
-import { AppProvider as Provider, AppConsumer } from '../../providers';
+import { AppProvider as Provider, AppConsumer, AppContext } from '../../providers';
 
 import { IC_FACEBOOK_W_SRCSET, IC_FACEBOOK_W, IC_GOOGLE_W } from '../../utils/Icons';
 
@@ -83,75 +83,58 @@ type State = {
   isLoggingIn: boolean,
 };
 
-class Intro extends Component<Props, State> {
-  timer: any;
+function Intro(props: Props) {
+  let timer: any;
+  let { state, dispatch } = React.useContext(AppContext);
+  let [isLoggingIn, setIsLoggingIn] = React.useState(false);
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isLoggingIn: false,
-    };
-  }
+  const onLogin = () => {
+    dispatch({ type: 'reset-user' });
+    setIsLoggingIn(true);
+    timer = setTimeout(() => {
+      const user: User = {
+        displayName: 'dooboolab',
+        age: 30,
+        job: 'developer',
+      };
+      dispatch({ type: 'set-user', payload: user });
+      setIsLoggingIn(false);
+    }, 1000);
+  };
 
-  render() {
-    return (
-      <AppConsumer>
-        {
-          (data) => {
-            return (
-              <Container>
-                <ContentWrapper>
-                  <Text>{data.state.user.displayName}</Text>
-                  <Text>{data.state.user.age ? data.state.user.age : ''}</Text>
-                  <Text>{data.state.user.job}</Text>
-                </ContentWrapper>
-                <ButtonWrapper>
-                  <Button
-                    id='btn'
-                    imgSrc={IC_GOOGLE_W}
-                    isLoading={this.state.isLoggingIn}
-                    onClick={() => this.onLogin(data)}
-                    // white={true}
-                    text={getString('LOGIN')}
-                  />
-                  <Button
-                    id='btn'
-                    onClick={() => this.navigate()}
-                    white={true}
-                    text={getString('NAVIGATE')}
-                  />
-                </ButtonWrapper>
-              </Container>
-            );
-          }
-        }
-      </AppConsumer>
-    );
-  }
-
-  onLogin = (data: AppState) => {
-    data.actions.resetUser();
-    this.setState({ isLoggingIn: true }, () => {
-      this.timer = setTimeout(() => {
-        const user: User = {
-          displayName: 'dooboolab',
-          age: 30,
-          job: 'developer',
-        };
-        data.actions.setUser(user);
-        this.setState({ isLoggingIn: false });
-      }, 1000);
-    });
-  }
-
-  navigate = () => {
+  const navigate = () => {
     const location: Object = {
       pathname: '/404',
       state: {},
     };
-    // this.props.history.replace(location);
-    this.props.history.push(location);
-  }
+    props.history.push(location);
+  };
+
+  return (
+    <Container>
+      <ContentWrapper>
+        <Text>{state.user.displayName}</Text>
+        <Text>{state.user.age ? state.user.age : ''}</Text>
+        <Text>{state.user.job}</Text>
+      </ContentWrapper>
+      <ButtonWrapper>
+        <Button
+          id='btn1'
+          imgSrc={IC_GOOGLE_W}
+          isLoading={isLoggingIn}
+          onClick={() => onLogin()}
+          // white={true}
+          text={getString('LOGIN')}
+        />
+        <Button
+          id='btn2'
+          onClick={() => navigate()}
+          white={true}
+          text={getString('NAVIGATE')}
+        />
+      </ButtonWrapper>
+    </Container>
+  );
 }
 
 export default Intro;
