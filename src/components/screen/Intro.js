@@ -120,7 +120,6 @@ function Intro(props: Props) {
       </ContentWrapper>
       <ButtonWrapper>
         <Button
-          id='btn1'
           imgSrc={IC_GOOGLE_W}
           isLoading={isLoggingIn}
           onClick={() => onLogin()}
@@ -128,7 +127,7 @@ function Intro(props: Props) {
           text={getString('LOGIN')}
         />
         <Button
-          id='btn2'
+          data-testid='btn2'
           onClick={() => navigate()}
           white={true}
           text={getString('NAVIGATE')}
