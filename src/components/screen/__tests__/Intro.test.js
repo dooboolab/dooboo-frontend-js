@@ -51,20 +51,25 @@ describe('[Intro] Interaction', () => {
   let rendered: TestRenderer.ReactTestRenderer;
   let root: TestRenderer.ReactTestRenderer.root;
   let instance;
-  let testingLib;
+  let renderResult: RenderResult;
 
   it('should simulate [onLogin] click with testing library', () => {
     jest.useFakeTimers();
-    testingLib = render(component, { context });
-    fireEvent.click(testingLib.getByText(getString('LOGIN')));
+    renderResult = render(component, { context });
+    fireEvent.click(renderResult.getByText(getString('LOGIN')));
     expect(setTimeout).toHaveBeenCalledTimes(1);
+    // expect(context.dispatch).toHaveBeenCalledWith({ type: 'reset-user' });
+    // expect(context.dispatch).toHaveBeenCalledWith({ type: 'set-user' }, expect.any(Object));
+    // expect(props.isLoading).toEqual(true); // TODO: test with useState
+
     act(() => {
       jest.runAllTimers();
     });
+ 
     expect(clearTimeout).toHaveBeenCalledTimes(1);
   });
 
-  it('should simulate [navigate] click', () => {
+  it('should simulate [navigate] when clicked', () => {
     rendered = renderer.create(component, { context });
     root = rendered.root;
 
