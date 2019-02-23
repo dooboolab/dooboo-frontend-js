@@ -25,7 +25,6 @@ function Temp(props: Props, state: State) {
   return (
     <Container>
       <Button
-        testID='btn'
         onClick={() => history.goBack()}
         text='back to tab page'
       />
