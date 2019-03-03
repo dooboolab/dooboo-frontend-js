@@ -23,7 +23,7 @@ describe('[Transparent] interaction', () => {
 
   let rendered: TestRenderer.ReactTestRenderer;
   let root: TestRenderer.ReactTestRenderer.root;
-  let component: any = <Button onClick={onClick}/>;
+  const component: any = <Button onClick={onClick}/>;
 
   beforeAll(() => {
     rendered = renderer.create(component);

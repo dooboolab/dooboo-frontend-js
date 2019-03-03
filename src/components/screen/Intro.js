@@ -8,7 +8,7 @@ import Button from '../shared/Button';
 import { device } from '../../theme';
 import { AppProvider as Provider, AppConsumer, AppContext } from '../../providers';
 
-import { IC_FACEBOOK_W_SRCSET, IC_FACEBOOK_W, IC_GOOGLE_W } from '../../utils/Icons';
+import { IC_FACEBOOK_W, IC_GOOGLE_W } from '../../utils/Icons';
 
 import type {
   User,
@@ -85,8 +85,8 @@ type State = {
 
 function Intro(props: Props) {
   let timer: any;
-  let { state, dispatch } = React.useContext(AppContext);
-  let [isLoggingIn, setIsLoggingIn] = React.useState(false);
+  const { state, dispatch } = React.useContext(AppContext);
+  const [isLoggingIn, setIsLoggingIn] = React.useState(false);
 
   const onLogin = () => {
     dispatch({ type: 'reset-user' });

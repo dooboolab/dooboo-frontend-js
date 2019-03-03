@@ -3,15 +3,9 @@ import { AppProvider } from '../AppProvider';
 
 import renderer from 'react-test-renderer';
 
-let props = {
-  navigation: {
-    navigate: jest.fn(),
-  },
-};
-
 describe('[AppProvider] rendering test', () => {
   let json: ReactTestRenderJSON;
-  const component = <AppProvider { ...props } />;
+  const component = <AppProvider/>;
 
   it('component and snapshot matches', () => {
     json = renderer.create(component).toJSON();
@@ -22,7 +16,7 @@ describe('[AppProvider] rendering test', () => {
 describe('[AppProvider] interactions', () => {
   let rendered: TestRenderer.ReactTestRenderer;
   let root: TestRenderer.ReactTestRenderer.root;
-  const component = <AppProvider { ...props } />;
+  const component = <AppProvider/>;
 
   const user = {
     displayName: 'dooboolab',
@@ -31,11 +25,6 @@ describe('[AppProvider] interactions', () => {
   };
 
   beforeEach(() => {
-    props = {
-      navigation: {
-        navigate: jest.fn(),
-      },
-    };
     rendered = renderer.create(component);
     root = rendered.root;
   });
