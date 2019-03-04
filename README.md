@@ -1,35 +1,37 @@
+### ANNOUNCEMENT
+DO NOT MODIFY OR CHANGE THE CODE BEFORE CONFIRMED BY `DOOBOOLAB`. THIS REPOSITORY IS USED IN `DOOBOO-CLI`.
+
 # React Flow Boilerplate
 [![codecov](https://codecov.io/gh/dooboolab/dooboo-frontend-js/branch/master/graph/badge.svg)](https://codecov.io/gh/dooboolab/dooboo-frontend-js)
 [![CircleCI](https://circleci.com/gh/dooboolab/dooboo-frontend-js.svg?style=svg)](https://circleci.com/gh/dooboolab/dooboo-frontend-js)
 
 > Specification
-* styled-component
-* flow
-* react-router-dom v4
-* jest
-* global state management with `context-api`
-* react-hook
-* localization
+* [react-native](https://github.com/facebook/react-native)
+* [react-router](https://github.com/ReactTraining/react-router)
+* [flow](https://github.com/facebook/flow)
+* [styled-components](https://github.com/styled-components/styled-components)
+* [jest](https://github.com/facebook/jest)
+* [react-testing-library](https://github.com/kentcdodds/react-testing-library)
+* [react-hook](https://reactjs.org/docs/hooks-intro.html)
 
-> We decided to remove `mobx` from the boilerplate from `dooboo-cli@1.4.0` completely. The reason to remove `mobx` is that we thought this isn't suitable with what `react` brought up as a design pattern today. `Functional programming` has been powered by `react-hook` so we chose to remove work on `object-oriented programming` which was more suitable with `mobx`. We hope you enjoy what we've brought up today.
-
-# Gain points
+### Gain points
 ```
-1. Sample of react-router-dom v4.
-2. Able to learn how to structure react app.
-3. Make your code safer with eslint and flow.
-4. Global state management with `context-api` and `react-hook`.
-5. Test your code with jest.
-6. Learn how to localize your project.
+1. Sample of context-api with `react-hook` (`useContext`).
+2. Know how to structure react web app with flow.
+3. Know how to navigate between screens with `react-router`.
+4. Know how to write test code with `react-native-testing-library`.
+5. Know how to `lint` your project with `eslint`.
+6. Know how to localize your project.
 ```
 
-# INSTALL
+### INSTALL
 ```
-1. npm install
-2. npm start
+npm install && npm start
+// or
+yarn && yarn start
 ```
 
-# Structures
+### Structures
 ```text
 app/
 ├─ assets
@@ -62,16 +64,18 @@ app/
 └─ webpack.config.prod.js
 ```
 
-# Running the project
+### Running the project
 Running the project is as simple as running
 ```sh
-npm run start
+npm install && npm start
+// or
+yarn && yarn start
 ```
 
 This runs the `start` script specified in our `package.json`, and will spawn off a server which reloads the page as we save our files.
 Typically the server runs at `http://localhost:8080`, but should be automatically opened for you.
 
-# Testing the project
+### Testing the project
 Testing is also just a command away:
 ```sh
 npm test
@@ -104,14 +108,14 @@ Time:        2.684s
 Ran all test suites.
 ```
 
-# Adding component
+### Adding component
 > Copy sourcecode in /src/components/screen/Temp.js
 > Create new js file with compnent name you will create
 
-# Writing tests with Jest
+### Writing tests with Jest
 We've created test examples with jest-ts in `src/components/screen/__tests__` and `src/components/shared/__tests__`. Since react is component oriented, we've designed to focus on writing test in same level of directory with component. You can simply run `npm test` to test if it succeeds and look more closer opening the source.
 
-# Localization
+### Localization
 We've defined Localization class in `src/models/Localization.js`. This model class is used in mobx store which is `src/stores/appStore.js`. Localization model imports `STRINGS.js` which handles localized strings.
 ```
 const STRINGS = {
@@ -146,8 +150,8 @@ In `index.js` when app starts it search for navigator's locale and set mobx stat
   ...
 ```
 
-# React version
+### React version
 16.8
 
-# react-router-dom version
+### react-router-dom version
 4
