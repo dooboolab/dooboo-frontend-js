@@ -3,21 +3,24 @@
 [![CircleCI](https://circleci.com/gh/dooboolab/dooboo-frontend-js.svg?style=svg)](https://circleci.com/gh/dooboolab/dooboo-frontend-js)
 
 > Specification
-* postcss
+* styled-component
 * flow
 * react-router-dom v4
-* context-api
-* test with `jest` and `react-test-renderer`
-* styled-component
+* jest
+* global state management with `context-api`
+* react-hook
 * localization
 
-> We decided to remove `mobx` from `js` boilerplate. We didn't, however, make changes in `ts` boilerplate. The reason to remove `mobx` is that we thought this isn't suitable with what `react` brought up as a design pattern. Today, they are more supportive in `functional-programming` rather than `object-oriented` which has been powered by `react-hook` in `16.8`. Unlike, `js`, `typescript` users are more familiar with `OOP` programming because `typescript` has mimicked lots of features in `JAVA` and `C++`. Hope you enjoy what we've brought up today as `react native javascript boilerplate`.
+> We decided to remove `mobx` from the boilerplate from `dooboo-cli@1.4.0` completely. The reason to remove `mobx` is that we thought this isn't suitable with what `react` brought up as a design pattern today. `Functional programming` has been powered by `react-hook` so we chose to remove work on `object-oriented programming` which was more suitable with `mobx`. We hope you enjoy what we've brought up today.
 
 # Gain points
 ```
 1. Sample of react-router-dom v4.
-2. Able to learn how to structure react app with `flow`, `context-api` with `jest`.
-3. Learn how to localize your project.
+2. Able to learn how to structure react app.
+3. Make your code safer with eslint and flow.
+4. Global state management with `context-api` and `react-hook`.
+5. Test your code with jest.
+6. Learn how to localize your project.
 ```
 
 # INSTALL
