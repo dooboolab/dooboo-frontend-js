@@ -5,7 +5,7 @@ import { ButtonPrimary, ButtonPrimaryLight } from '../ui/Buttons';
 
 type Props = {
   id?: string,
-  white?: boolean,
+  inverted?: boolean,
   imgSrc?: any,
   text?: string,
   onClick?: () => void,
