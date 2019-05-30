@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TransparentButton = styled('button')`
+export const ButtonPrimary = styled('button')`
   display: flex;
   width: 100%;
   height: 100%;
@@ -14,7 +14,7 @@ export const TransparentButton = styled('button')`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background: rgba(235, 87, 87, 0.03);
+  background: ${(props) => props.theme.btnPrimary};
   color: #333;
   opacity: 1;
   // transition: opacity 0.2s;
@@ -27,18 +27,20 @@ export const TransparentButton = styled('button')`
   }
 `;
 
-export const WhiteButton = styled('button')`
+export const ButtonPrimaryLight = styled('button')`
   display: flex;
   width: 100%;
   height: 100%;
   border-radius: 3px;
   border-style: solid;
   border-width: 1px;
+  border-color: #c3c3c3;
   margin-bottom: 8px;
 
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  background: ${(props) => props.theme.btnPrimaryLight};
   opacity: 1;
   // transition: opacity 0.2s ease-in-out;
 

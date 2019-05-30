@@ -1,17 +1,20 @@
 import React, { useReducer } from 'react';
 import { AppContext } from '../contexts';
 import type { User, Locale } from '../types';
+import type { ThemeType } from '../theme';
 import STRINGS from '../../STRINGS';
 
 const AppConsumer = AppContext.Consumer;
 
 type Props = { };
 export type State = {
+  theme: ThemeType,
   user: User,
   locale: Locale,
 };
 
 const initialState: State = {
+  theme: 'LIGHT',
   user: {
     displayName: '',
     age: 0,
@@ -25,6 +28,8 @@ const reducer = (state, action) => {
       return { ...state, user: initialState.user };
     case 'set-user':
       return { ...state, user: action.payload };
+    case 'change-theme-mode':
+      return { ...state, theme: action.payload.theme };
   }
 };
 
