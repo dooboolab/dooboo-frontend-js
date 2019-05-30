@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { WhiteButton, TransparentButton } from '../ui/Buttons';
+import { ButtonPrimary, ButtonPrimaryLight } from '../ui/Buttons';
 
 type Props = {
   id?: string,
@@ -16,9 +16,14 @@ type State = {
 
 };
 
-const Text = styled.span`
+const PrimaryTextLight = styled.span`
   font-size: 14px;
-  color: rgb(128, 109, 216);
+  color: ${(props) => props.theme.btnPrimaryLightFont};
+`;
+
+const PrimaryText = styled.span`
+  font-size: 14px;
+  color: ${(props) => props.theme.btnPrimaryFont};
 `;
 
 const LogoImg = styled.img`
@@ -26,7 +31,7 @@ const LogoImg = styled.img`
   left: 16px;
   height: 20px;
   width: 20px;
-  object-fit: cover
+  object-fit: cover;
 `;
 
 const Spinner = styled.div`
@@ -39,14 +44,14 @@ const Spinner = styled.div`
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-  }
+  };
 `;
 
-function Button(props: Props, state: State) {
-  const { white, onClick, imgSrc, text } = props;
-  if (props.white) {
+function Button(props: Props) {
+  const { inverted, onClick, imgSrc, text } = props;
+  if (inverted) {
     return (
-      <WhiteButton
+      <ButtonPrimaryLight
         style={{ height: '60px' }}
         onClick={onClick}
       >
@@ -61,14 +66,14 @@ function Button(props: Props, state: State) {
                   />
                   : null
               }
-              <Text>{props.text}</Text>
+              <PrimaryTextLight>{props.text}</PrimaryTextLight>
             </div>
         }
-      </WhiteButton>
+      </ButtonPrimaryLight>
     );
   }
   return (
-    <TransparentButton
+    <ButtonPrimary
       style={{ height: '60px' }}
       onClick={onClick}
     >
@@ -83,10 +88,10 @@ function Button(props: Props, state: State) {
                 />
                 : null
             }
-            <Text style={{ color: 'white' }}>{props.text}</Text>
+            <PrimaryText>{props.text}</PrimaryText>
           </div>
       }
-    </TransparentButton>
+    </ButtonPrimary>
   );
 }
 
