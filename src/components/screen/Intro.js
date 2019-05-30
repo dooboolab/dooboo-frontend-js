@@ -128,7 +128,7 @@ function Intro(props: Props) {
       type: 'change-theme-mode',
       payload,
     });
-  }
+  };
 
   return (
     <Container>
