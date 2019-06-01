@@ -32,14 +32,6 @@ DO NOT MODIFY OR CHANGE THE CODE BEFORE CONFIRMED BY `DOOBOOLAB`. THIS REPOSITOR
 
 ```
 
-### INSTALL
-```
-npm install && npm start
-// or
-yarn && yarn start
-```
-* we recommend using yarn
-
 ### Structures
 ```text
 app/
@@ -73,13 +65,12 @@ app/
 └─ webpack.config.prod.js
 ```
 
-### Running the project
-Running the project is as simple as running
+### Install and running the project
+Installing and running the project is as simple as running
 ```sh
-npm install && npm start
-// or
 yarn && yarn start
 ```
+* Note that we recommend using yarn.
 
 This runs the `start` script specified in our `package.json`, and will spawn off a server which reloads the page as we save our files.
 Typically the server runs at `http://localhost:8080`, but should be automatically opened for you.
@@ -87,7 +78,7 @@ Typically the server runs at `http://localhost:8080`, but should be automaticall
 ### Testing the project
 Testing is also just a command away:
 ```sh
-npm test
+yarn test
 
 > dooboo-starter@1.0.0 test /Users/hyochan/Documents/Github/dooboolab/dooboo-frontend-js
 > jest -u
@@ -117,12 +108,48 @@ Time:        2.684s
 Ran all test suites.
 ```
 
-### Adding component
+### Theming
+We use `styled-component` to provide theming. We recommend to use color variables inside `theme.js` and use it else where. We handle this with `context-api` with `react-hook` inside `AppProvider.js`
+```js
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'reset-user':
+      return { ...state, user: initialState.user };
+    case 'set-user':
+      return { ...state, user: action.payload };
+    case 'change-theme-mode':
+      return { ...state, theme: action.payload.theme };
+  }
+};
+
+function AppProvider(props: Props) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const value = { state, dispatch };
+
+  return (
+    <AppContext.Provider value={value}>
+      {props.children}
+    </AppContext.Provider>
+  );
+}
+```
+
+### Creating components
 > Copy sourcecode in /src/components/screen/Temp.js
+> Copy sourcecode in /src/components/screen/__test__/Temp.test.js
 > Create new js file with compnent name you will create
 
+To do above more easily, you can simly install [dooboo-cli](https://www.npmjs.com/package/dooboo-cli). Then you can easily create [screen] or [shared] components along with `test file` by running below commands.
+```sh
+# screen component
+dooboo screen [MyScreen]
+# shared component
+dooboo shared [MyShared]
+```
+
+
 ### Writing tests with Jest
-We've created test examples with jest-ts in `src/components/screen/__tests__` and `src/components/shared/__tests__`. Since react is component oriented, we've designed to focus on writing test in same level of directory with component. You can simply run `npm test` to test if it succeeds and look more closer opening the source.
+We've created test examples with jest-ts in `src/components/screen/__tests__` and `src/components/shared/__tests__`. Since react is component oriented, we've designed to focus on writing test in same level of directory with component. You can simply run `yarn test` to test if it succeeds and look more closer opening the source.
 
 ### Localization
 We've defined Localization class in `src/models/Localization.js`. This model class is used in mobx store which is `src/stores/appStore.js`. Localization model imports `STRINGS.js` which handles localized strings.
