@@ -8,8 +8,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/',
   },
-  plugins: [
-  ],
+  plugins: [],
   resolve: {
     modules: [
       './node_modules',
@@ -22,6 +21,7 @@ module.exports = {
     host: 'localhost',
     port: 8080,
     historyApiFallback: true,
+    hot: true,
   },
   module: {
     rules: [
@@ -38,7 +38,7 @@ module.exports = {
                 '@babel/preset-flow'
               ],
               plugins: [
-                ['@babel/plugin-proposal-decorators', { 'legacy': true }],
+                'react-hot-loader/babel',
                 '@babel/plugin-proposal-function-sent',
                 '@babel/plugin-proposal-export-namespace-from',
                 '@babel/plugin-proposal-numeric-separator',
