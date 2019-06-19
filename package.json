@@ -7,7 +7,7 @@
     "start": "webpack-dev-server -d --hot --config webpack.config.js --watch",
     "flow": "flow",
     "test": "jest -u",
-    "lint": "eslint -c .eslintrc.js './src/**/*.js'",
+    "lint": "eslint -c .eslintrc.js './src/**/**/*.js'",
     "production": "NODE_ENV=production webpack -p --config webpack.config.prod.js",
     "build": "babel src/ -d lib/",
     "prepublish": "yarn run build"
