@@ -16,7 +16,11 @@ module.exports = {
     }],
     "semi": [2, "always"],
     "arrow-parens": ["error", "always"],
-    "space-before-function-paren": ["error", "never"],
+    "space-before-function-paren": ["error", {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always"
+    }],
     "standard/object-curly-even-spacing": 0,
     "no-new-object": "error",
     "no-array-constructor": "error",
